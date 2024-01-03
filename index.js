@@ -11,16 +11,17 @@ const fetchMovieData = async function () {
   const LocalData = localStorage.getItem("movieData");
   if (LocalData) {
     //localstorage에 movidata의 value가 저장되어있다면
+    console.log(JSON.parse(LocalData));
     return JSON.parse(LocalData);
   } else {
     //API를 불러오는 함수
     const response = await fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1",
+      "https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=11",
       options
     );
     const data = await response.json();
     localStorage.setItem("movieData", JSON.stringify(data.results));
-    // console.log(data.results);
+    console.log(data);
     return data.results;
   } // 영화 내부의 데이터를 반환
 };
@@ -30,17 +31,16 @@ fetchMovieData().then((movieContents) => {
   console.log(movieContents);
   for (let i = 0; i < 5; i++) {
     const recCard = `
-      <div class="rec-card" id="${movieContents[i].id}">
+      <div class="rec-card" style="background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url(https://image.tmdb.org/t/p/original${movieContents[i].backdrop_path})" id="${movieContents[i].id}">
       <div>
-        <img
-          src="https://image.tmdb.org/t/p/w500${movieContents[i].poster_path}"/>
-          </div>
+        
         <div style="flex-direction: column">
           <div class="rec-content">
-            <p><span class="title">${movieContents[i].title}</span>
+            <p class="title"><span>${movieContents[i].title}</span>
+            <br>
             <span>(${movieContents[i].original_title})</span>
             </p>
-            <p>평점 : ⭐${movieContents[i].vote_average}
+            <p style="font-size:24px">평점 : ⭐${movieContents[i].vote_average}
             <p class="overview">${movieContents[i].overview}</p>
           </div>
         </div>
@@ -54,7 +54,7 @@ fetchMovieData().then((movieContents) => {
 //최초 영화 리스트 생성
 let imgCnt = 0; //이미지가 몇개 생성되었는지 카운트
 fetchMovieData().then((movieContents) => {
-  for (i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i++) {
     document
       .querySelectorAll(".main-box")[0]
       .insertAdjacentHTML("beforeend", text(movieContents));
@@ -66,23 +66,23 @@ fetchMovieData().then((movieContents) => {
 const text = function (movieContents) {
   return `
     <div><img
-    src="https://image.tmdb.org/t/p/w500${
+    src="https://image.tmdb.org/t/p/original${
       movieContents[imgCnt].poster_path
     }" id="${movieContents[imgCnt].id}"/></div>
     <div><img
-    src="https://image.tmdb.org/t/p/w500${
+    src="https://image.tmdb.org/t/p/original${
       movieContents[imgCnt + 1].poster_path
     }" id="${movieContents[imgCnt + 1].id}"/></div>
     <div><img
-    src="https://image.tmdb.org/t/p/w500${
+    src="https://image.tmdb.org/t/p/original${
       movieContents[imgCnt + 2].poster_path
     }" id="${movieContents[imgCnt + 2].id}"/></div>
     <div><img
-    src="https://image.tmdb.org/t/p/w500${
+    src="https://image.tmdb.org/t/p/original${
       movieContents[imgCnt + 3].poster_path
     }" id="${movieContents[imgCnt + 3].id}"/></div>
     <div><img
-    src="https://image.tmdb.org/t/p/w500${
+    src="https://image.tmdb.org/t/p/original${
       movieContents[imgCnt + 4].poster_path
     }" id="${movieContents[imgCnt + 4].id}"/></div>
   `;
@@ -90,9 +90,9 @@ const text = function (movieContents) {
 //영화 리스트 추가 버튼
 
 // 영화 리스트 추가 생성
-const more = `<div class="more-btn">영화를 더 보고 싶다면 클릭!</div>`;
 
 fetchMovieData().then((movieContents) => {
+  const more = `<div class="more-btn">영화를 더 보고 싶다면 클릭!</div>`;
   document.querySelectorAll(".more")[0].insertAdjacentHTML("beforeend", more);
 
   document.querySelector(".more-btn").addEventListener("click", function () {
@@ -112,8 +112,9 @@ fetchMovieData().then((movieContents) => {
 //추천카드의 버튼을 만드는 반복문
 const addCircleButton = `<button class="rec-btn"></button>`;
 const btnId = document.querySelector("#btn");
+const addButton = 5;
 
-for (i = 0; i < 5; i++) {
+for (let i = 0; i < addButton; i++) {
   btnId.insertAdjacentHTML("beforeend", addCircleButton);
 }
 
@@ -148,7 +149,7 @@ fetchMovieData().then((movieContents) => {
       console.log(Number(this.id));
       movieContents.forEach((element) => {
         if (this.id == element.id) {
-          console.log(`${this.id}번 id가 일치합니다`);
+          alert(`${this.id}번 id가 일치합니다`);
           console.log(element.title);
         }
       });
@@ -171,7 +172,7 @@ fetchMovieData().then((movieContents) => {
     let value = document.querySelector("#input").value.toLowerCase();
     const mainBox = document.querySelectorAll(".main-box");
     mainBox[0].innerHTML = "";
-    for (i = 0; i < movieContents.length; i++) {
+    for (let i = 0; i < movieContents.length; i++) {
       if (
         movieContents[i].title.toLowerCase().includes(value) ||
         movieContents[i].original_title.toLowerCase().includes(value)
@@ -182,27 +183,6 @@ fetchMovieData().then((movieContents) => {
   });
 });
 
-const search = function (movieContents) {
-  return `
-    <div><img
-    src="https://image.tmdb.org/t/p/w500${
-      movieContents[imgCnt].poster_path
-    }" id="${movieContents[imgCnt].id}"/></div>
-    <div><img
-    src="https://image.tmdb.org/t/p/w500${
-      movieContents[imgCnt + 1].poster_path
-    }" id="${movieContents[imgCnt + 1].id}"/></div>
-    <div><img
-    src="https://image.tmdb.org/t/p/w500${
-      movieContents[imgCnt + 2].poster_path
-    }" id="${movieContents[imgCnt + 2].id}"/></div>
-    <div><img
-    src="https://image.tmdb.org/t/p/w500${
-      movieContents[imgCnt + 3].poster_path
-    }" id="${movieContents[imgCnt + 3].id}"/></div>
-    <div><img
-    src="https://image.tmdb.org/t/p/w500${
-      movieContents[imgCnt + 4].poster_path
-    }" id="${movieContents[imgCnt + 4].id}"/></div>
-  `;
-};
+const arr = JSON.parse(localStorage.getItem(`movieData`));
+
+console.log(arr[0]);

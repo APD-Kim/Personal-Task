@@ -75,13 +75,16 @@
 }
 
 .rec-card {
+  /* filter: brightness(70%); */
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100vw;
-  height: 100%;
+  height: 70vh;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
   position: relative;
+  transition: all 1s;
 }
 
 .rec-card img {
@@ -92,20 +95,30 @@
 
 .rec-content {
   font-size: 16px;
-  width: 500px;
+  width: 70vw;
 }
 
 .rec-content {
   margin-bottom: 50px;
 }
 
+.rec-content {
+  margin-left: 100px;
+}
+
+.rec-btn {
+  margin-top: 10px;
+}
+
 .title {
   font-size: 48px;
+  width: 1000px;
   margin-top: 0;
 }
 
 .overview {
   margin-top: 70px;
+  font-size: 20px;
 }
 
 .button button {
