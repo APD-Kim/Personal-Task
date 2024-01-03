@@ -57,6 +57,9 @@
   flex-wrap: wrap;
 }
 
+.main-box {
+  min-height: 1000px;
+}
 .main-box div {
   width: 15vw;
   height: 20vw;

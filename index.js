@@ -137,10 +137,6 @@ for (let i = 0; i < recBtn.length; i++) {
 
 //동기 비동기 학습, 블록 스코프, 전역 스코프 학습
 
-document.querySelector("#search").addEventListener("click", function (event) {
-  event.preventDefault();
-  console.log(`hi`);
-});
 //foreach로 idValue에 맞는 id를 검색해서 일치하는 아이디가 있으면 해당 배열의 내용을 기반으로 모달창의 내용을 바꿔줘. 만약 없다면 catch해서 alret창에 내용이 아직 준비되지 않았다고 알려줘
 fetchMovieData().then((movieContents) => {
   const mainBoxLength =
@@ -159,6 +155,54 @@ fetchMovieData().then((movieContents) => {
     });
   }
   console.log();
-});// 아직 다 안만듬
+}); // 아직 다 안만듬
 
 //문자열을 넣고 검색했을때 movieContent라는 변수에 담긴 Array 안에 한글 title이나 영어 title중에 하나라도 맞는게 있다면 그 영화만 보여줘, 또한 영어로 검색했을 경우에는 lowerCase로 적용시켜줘
+
+const searchPoster = function (movieContents) {
+  return `
+  <div><img src="https://image.tmdb.org/t/p/w500${movieContents[i].poster_path}" id="${movieContents[i].id}"/></div>
+`;
+}; //검색한 값에 포함되는 title의 포스터를 게시해줌
+
+fetchMovieData().then((movieContents) => {
+  document.querySelector("#search").addEventListener("click", function (e) {
+    e.preventDefault();
+    let value = document.querySelector("#input").value.toLowerCase();
+    const mainBox = document.querySelectorAll(".main-box");
+    mainBox[0].innerHTML = "";
+    for (i = 0; i < movieContents.length; i++) {
+      if (
+        movieContents[i].title.toLowerCase().includes(value) ||
+        movieContents[i].original_title.toLowerCase().includes(value)
+      ) {
+        mainBox[0].insertAdjacentHTML("beforeend", searchPoster(movieContents));
+      }
+    }
+  });
+});
+
+const search = function (movieContents) {
+  return `
+    <div><img
+    src="https://image.tmdb.org/t/p/w500${
+      movieContents[imgCnt].poster_path
+    }" id="${movieContents[imgCnt].id}"/></div>
+    <div><img
+    src="https://image.tmdb.org/t/p/w500${
+      movieContents[imgCnt + 1].poster_path
+    }" id="${movieContents[imgCnt + 1].id}"/></div>
+    <div><img
+    src="https://image.tmdb.org/t/p/w500${
+      movieContents[imgCnt + 2].poster_path
+    }" id="${movieContents[imgCnt + 2].id}"/></div>
+    <div><img
+    src="https://image.tmdb.org/t/p/w500${
+      movieContents[imgCnt + 3].poster_path
+    }" id="${movieContents[imgCnt + 3].id}"/></div>
+    <div><img
+    src="https://image.tmdb.org/t/p/w500${
+      movieContents[imgCnt + 4].poster_path
+    }" id="${movieContents[imgCnt + 4].id}"/></div>
+  `;
+};
