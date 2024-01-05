@@ -25,6 +25,8 @@ export const fetchMovieData = async function () {
 };
 export const arr = JSON.parse(localStorage.getItem(`movieData`));
 
+
+
 export const buildCard = () => {
   const RECOMMEND_CARD_COUNT = 5;
   for (let i = 0; i < RECOMMEND_CARD_COUNT; i++) {

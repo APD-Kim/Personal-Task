@@ -6,8 +6,22 @@ document.addEventListener("DOMContentLoaded", () => {
   buildCard();
 });
 
+console.log(arr);
+const numArr = [];
+console.log(numArr);
+let forCount = 5;
+for (let i = 0; i < forCount; i++) {
+  let randomNum = Math.floor(Math.random() * 20);
+  if (numArr.includes(randomNum)) {
+    forCount++;
+    continue;
+  }
+  numArr.push(randomNum);
+}
 
-
+const newSet = new Set();
+//size가 5를 넘어가는지 
+console.log(numArr);
 
 //최초 영화 리스트 생성
 let imgCnt = 0; //이미지가 몇개 생성되었는지 카운트
@@ -17,7 +31,7 @@ fetchMovieData().then((movieContents) => {
       .querySelectorAll(".main-box")[0]
       .insertAdjacentHTML("beforeend", text(movieContents));
     imgCnt += 5;
-  };
+  }
 });
 
 //영화 포스터를 배치하는 변수
@@ -96,7 +110,7 @@ mainBox.addEventListener("click", function (e) {
 //문자열을 넣고 검색했을때 movieContent라는 변수에 담긴 Array 안에 한글 title이나 영어 title중에 하나라도 맞는게 있다면 그 영화만 보여줘, 또한 영어로 검색했을 경우에는 lowerCase로 적용시켜줘
 
 //검색한 값에 포함되는 title의 포스터를 게시해줌
-
+//곽지민 , 우성종
 document.querySelector("#search").addEventListener("click", function (e) {
   e.preventDefault();
   let value = document.querySelector("#input").value.toLowerCase();
@@ -116,3 +130,18 @@ document.querySelector("#search").addEventListener("click", function (e) {
     }
   }
 });
+
+// addNode(index, value) {
+//   if (index === 0) {
+//     const newNode = new Node(value);
+//     newNode.next = this.head;
+//     this.head = newNode;
+//   } else {
+//     let prevNode = this.getNode(index - 1);
+//     let newNode = new Node(value);
+//     newNode.next = prevNode.next;
+//     prevNode.next = newNode;
+//   }
+// }
+
+// 1,2,4,3

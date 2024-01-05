@@ -13,3 +13,8 @@ app.get("/", (req, res) => {
   res.sendFile(absolutePath);
   //openapi의 데이터를 보낸다
 });
+
+//api 서버 만들기
+//rest api
+//restful api
+//DBMS
