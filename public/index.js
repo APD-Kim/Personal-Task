@@ -5,11 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchMovieData();
   buildCard();
 });
-// const newSet = new Set();
-//size가 5를 넘어가는지
-
-//이미지가 몇개 생성되었는지 카운트
-
 //영화 포스터를 배치하는 변수
 let imgCnt = 0;
 const text = function (arr) {
@@ -77,11 +72,13 @@ for (let i = 0; i < recBtn.length; i++) {
   });
 }
 //이미지 클릭 시 ID 알림창
+
 const mainBox = document.querySelector(".main-box");
 mainBox.addEventListener("click", function (e) {
+  console.log(e.target);
   if (e.target && e.target.matches("img")) {
     alert(`ID : ${e.target.id}`);
-  }
+  };
 });
 
 //검색기능
@@ -104,18 +101,7 @@ document.querySelector("#search").addEventListener("click", function (e) {
     }
   }
 });
+//css스타일에서 display를 사용하려고 했으나, 그냥 이렇게 해보고싶어서 했습니다.
 
-// addNode(index, value) {
-//   if (index === 0) {
-//     const newNode = new Node(value);
-//     newNode.next = this.head;
-//     this.head = newNode;
-//   } else {
-//     let prevNode = this.getNode(index - 1);
-//     let newNode = new Node(value);
-//     newNode.next = prevNode.next;
-//     prevNode.next = newNode;
-//   }
-// }
+//grid column
 
-// 1,2,4,3

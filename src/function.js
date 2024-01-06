@@ -6,6 +6,10 @@ const options = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzE2MjE1OWJkOGJhMGYxMTk5Zjc3ZDU0NDUxZGRhMCIsInN1YiI6IjY1OTM1NTdkNjUxZmNmNjAzZjhkZTJhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ekYKjL96tBuoevhvYdJBhCu94l-aWTXQb2e9auZVDOs",
   },
 };
+// import dotenv from "dotenv";
+// dotenv.config;
+// console.log(process.env.API_KEY);
+
 //API를 불러오는 함수
 export const fetchMovieData = async function () {
   const LocalData = localStorage.getItem("movieData");
@@ -27,7 +31,7 @@ export const arr = JSON.parse(localStorage.getItem(`movieData`));
 
 //겹치지 않는 랜덤한 정수 5개 출력
 const randomArr = [];
-let forCount = 5;
+let forCount = 5; //6
 for (let i = 0; i < forCount; i++) {
   let randomNum = Math.floor(Math.random() * 20);
   if (randomArr.includes(randomNum)) {
