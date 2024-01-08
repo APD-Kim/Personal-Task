@@ -34,6 +34,7 @@ export const createButton = () => {
       .insertAdjacentHTML("beforeend", `<button class="rec-btn"></button>`);
   }
 };
+//테스트
 
 //포스터 생성
 
@@ -43,6 +44,7 @@ export const text = function (MOVIE_DATA, i) {
     src="https://image.tmdb.org/t/p/original${MOVIE_DATA[i].poster_path}" id="${MOVIE_DATA[i].id}"/></div>
   `;
 };
+
 
 //TMDb API호출 후 로컬스토리지에 저장
 
