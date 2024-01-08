@@ -2,7 +2,8 @@ const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: "process.env.ACCESS_TOKEN",
+    Authorization:
+      "bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzE2MjE1OWJkOGJhMGYxMTk5Zjc3ZDU0NDUxZGRhMCIsInN1YiI6IjY1OTM1NTdkNjUxZmNmNjAzZjhkZTJhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ekYKjL96tBuoevhvYdJBhCu94l-aWTXQb2e9auZVDOs",
   },
 };
 
@@ -11,7 +12,7 @@ console.log(options.headers.Authorization);
 //API를 불러오는 함수
 const fetchMovieData = async function () {
   const LocalData = localStorage.getItem("movieData");
-  if (LocalData) {
+  if (LocalData && LocalData !== undefined) {
     return JSON.parse(LocalData);
   } else {
     const response = await fetch(
@@ -66,9 +67,9 @@ const buildCard = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   // 페이지가 로드될 때 fetchMovieData 함수 실행
-  fetchMovieData();
+  await fetchMovieData();
   buildCard();
 });
 //영화 포스터를 배치하는 변수
