@@ -1,9 +1,12 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const path = require("path");
+import path from "path";
 app.use(express.static("public"));
-app.use(express.static("src"));
-require("dotenv").config();
+app.use(express.static("commons"));
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.listen(5500, () => {
   console.log("http://localhost:5500 에서 서버 실행중");
